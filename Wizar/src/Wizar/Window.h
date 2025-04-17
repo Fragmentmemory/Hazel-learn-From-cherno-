@@ -20,7 +20,7 @@ namespace Wizar {
 	};
 
 	//基于桌面系统窗口的接口
-	class Wizar_API Window
+	class WIZAR_API Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

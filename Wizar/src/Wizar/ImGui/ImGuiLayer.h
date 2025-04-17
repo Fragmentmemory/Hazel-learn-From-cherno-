@@ -10,7 +10,7 @@
 
 //构建引擎自己的ui界面
 namespace Wizar {
-	class Wizar_API ImGuiLayer:public Layer
+	class WIZAR_API ImGuiLayer:public Layer
 	{
 	public:
 		ImGuiLayer();

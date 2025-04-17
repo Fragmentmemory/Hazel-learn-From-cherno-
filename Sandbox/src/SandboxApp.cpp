@@ -1,4 +1,4 @@
-#include <Wizar.h>
+#include <wizar.h>
 
 #include "imgui/imgui.h"
 

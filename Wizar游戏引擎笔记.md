@@ -276,17 +276,17 @@ void Application::OnEvent(Event& e)
 
 ## Layers
 
-### vector::emplace
+**vector::emplace**
 
 `emplace` 函数是 C++11 引入的标准库容器（如 `std::vector`, `std::deque`, `std::list`, `std::set`, `std::map` 等）中的一个成员函数，用于在容器中原地构造元素。与 `insert` 或 `push_back` 等函数相比，`emplace` 可以在不创建临时对象的情况下直接在容器的目标位置构造对象，从而提高性能。
 
-#### `emplace` 的作用
+**`emplace` 的作用**
 
 1. **原地构造**：`emplace` 允许你在容器的指定位置直接构造对象，而不需要先创建对象再复制或移动到容器中。这意味着可以减少不必要的对象拷贝或移动操作，提高程序的效率。
 2. **灵活性**：`emplace` 接受与构造函数相同的参数，因此可以灵活地构造各种类型的对象。
 3. **性能优化**：通过避免不必要的临时对象创建和复制，`emplace` 可以提供比 `insert` 或 `push_back` 更好的性能，尤其是在处理大型对象或复杂对象时。
 
-### sandbox 中的函数和 项目Nut ( Hazel ) 有什么关系?
+**sandbox 中的函数和 项目Wizar 有什么关系?**
 
 他们是怎样传递的？ 在代码中，Sandbox 类的构造函数 
 
@@ -298,9 +298,9 @@ Sandbox() {
 
 通过 PushLayer ( ) 创建 ExampleLayer 图层对象并将其添加到 LayerStack 中， 
 
-（而且 PushLayer 函数是 Nut 项目中 LayerStack 类中的一个函数） 
+（而且 PushLayer 函数是 Wizar 项目中 LayerStack 类中的一个函数） 
 
-#### 这些函数是怎样能够影响到 application 中的函数的？ 
+**这些函数是怎样能够影响到 application 中的函数的？** 
 
 在项目 Sandbox 中，ExampleLayer 这个类继承自 Hazel::Layer，并且重写了 OnUpdate 和 OnEvent 函数。 
 
@@ -310,7 +310,7 @@ Sandbox() {
 
 比如在 application.cpp 中，(*--iter)->OnEvent(e); 就是自动辨别 iter 的类型，然后自动的使用了这个类下的成员函数 OnEvent 
 
-#### 总结
+**总结**
 
 所以，在 Application 类的 Run 函数中，你遍历 m_LayerStack 并调用其每个图层的 OnUpdate 函数。 
 
@@ -322,11 +322,11 @@ Sandbox() {
 
 ## Imgui
 
-### 单例模式（Singleton Pattern）
+**单例模式（Singleton Pattern）**
 
 ​	是一种创建型设计模式，它确保一个类只有一个实例，并提供一个全局访问点来访问这个实例。单例模式通常用于那些需要控制资源访问的场景，比如数据库连接、线程池、日志系统等，这些资源在整个应用程序中只需要一个共享实例。
 
-##### 单例模式的核心要素
+**单例模式的核心要素**
 
 1. 私有构造函数：
    - 单例类的构造函数必须是私有的，以防止外部类通过构造函数创建多个实例。
@@ -335,7 +335,7 @@ Sandbox() {
 3. 公共静态方法：
    - 单例类提供一个公共的静态方法（通常称为`getInstance`），用于返回类的唯一实例。
 
-### 关于WindowsWindow.cpp中的回调函数和ImGuiLayer.cpp中的OnKeyTypedEvent的关系 
+**关于WindowsWindow.cpp中的回调函数和ImGuiLayer.cpp中的OnKeyTypedEvent的关系** 
 
 为什么这两个函数有所联系？？？ 
 
@@ -670,7 +670,7 @@ glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALS
 
   渲染器，实现具体渲染算法（前向/延迟渲染），处理场景到图像的转换。
 
-- Scene Graph
+- Scene Graph 
 
   场景图，树状结构管理场景对象及其层级关系，优化渲染顺序。
 
@@ -711,3 +711,408 @@ glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "projection"), 1, GL_FALS
   - (eg.reflections, ambient occlusion)
 
   如屏幕空间反射(SSR)、环境光遮蔽(SSAO)，增强场景真实感
+
+## OpenGL着色器
+
+### [Vertex](https://www.khronos.org/opengl/wiki/Vertex_Shader) 和 [Fragment Shader](https://www.khronos.org/opengl/wiki/Fragment_Shader) 的完全编译/链接样例代码
+
+```c++
+// Read our shaders into the appropriate buffers
+std::string vertexSource = // Get source code for vertex shader.
+std::string fragmentSource = // Get source code for fragment shader.
+
+// Create an empty vertex shader handle
+GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+// Send the vertex shader source code to GL
+// Note that std::string's .c_str is NULL character terminated.
+const GLchar *source = (const GLchar *)vertexSource.c_str();
+glShaderSource(vertexShader, 1, &source, 0);
+
+// Compile the vertex shader
+glCompileShader(vertexShader);
+
+GLint isCompiled = 0;
+glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
+if(isCompiled == GL_FALSE)
+{
+	GLint maxLength = 0;
+	glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
+
+	// The maxLength includes the NULL character
+	std::vector<GLchar> infoLog(maxLength);
+	glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
+	
+	// We don't need the shader anymore.
+	glDeleteShader(vertexShader);
+
+	// Use the infoLog as you see fit.
+	
+	// In this simple program, we'll just leave
+	return;
+}
+
+// Create an empty fragment shader handle
+GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+// Send the fragment shader source code to GL
+// Note that std::string's .c_str is NULL character terminated.
+source = (const GLchar *)fragmentSource.c_str();
+glShaderSource(fragmentShader, 1, &source, 0);
+
+// Compile the fragment shader
+glCompileShader(fragmentShader);
+
+glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
+if (isCompiled == GL_FALSE)
+{
+	GLint maxLength = 0;
+	glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
+
+	// The maxLength includes the NULL character
+	std::vector<GLchar> infoLog(maxLength);
+	glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
+	
+	// We don't need the shader anymore.
+	glDeleteShader(fragmentShader);
+	// Either of them. Don't leak shaders.
+	glDeleteShader(vertexShader);
+
+	// Use the infoLog as you see fit.
+	
+	// In this simple program, we'll just leave
+	return;
+}
+
+// Vertex and fragment shaders are successfully compiled.
+// Now time to link them together into a program.
+// Get a program object.
+GLuint program = glCreateProgram();
+
+// Attach our shaders to our program
+glAttachShader(program, vertexShader);
+glAttachShader(program, fragmentShader);
+
+// Link our program
+glLinkProgram(program);
+
+// Note the different functions here: glGetProgram* instead of glGetShader*.
+GLint isLinked = 0;
+glGetProgramiv(program, GL_LINK_STATUS, (int *)&isLinked);
+if (isLinked == GL_FALSE)
+{
+	GLint maxLength = 0;
+	glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+	// The maxLength includes the NULL character
+	std::vector<GLchar> infoLog(maxLength);
+	glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+	
+	// We don't need the program anymore.
+	glDeleteProgram(program);
+	// Don't leak shaders either.
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+
+	// Use the infoLog as you see fit.
+	
+	// In this simple program, we'll just leave
+	return;
+}
+
+// Always detach shaders after a successful link.
+glDetachShader(program, vertexShader);
+glDetachShader(program, fragmentShader);
+```
+
+### 可分离着色器程序（Separate Shader Programs）
+
+1. **核心概念与传统限制**
+
+- **传统着色器程序的痛点**：
+  在OpenGL中，`glUseProgram()`函数一次只能绑定一个着色器程序，而该程序必须包含所有活跃的着色器阶段（如顶点、片段、几何着色器）。这意味着开发者无法在运行时动态混合不同阶段的着色器代码，缺乏灵活性。
+- **可分离程序的解决方案**：
+  可分离着色器程序允许开发者将不同着色器阶段（如顶点阶段、片段阶段）的代码拆分到多个独立的程序中。例如：
+  - 使用程序A处理顶点和片段阶段。
+  - 使用程序B处理几何和细分阶段。
+  - 在渲染时动态组合这些程序，实现更灵活的管线控制。
+
+#### **2. 创建可分离程序的两种方法**
+
+**方法一：显式标记可分离性**
+
+1. 设置分离标志：
+
+   在链接程序前，通过
+
+   ```
+   glProgramParameter(program, GL_PROGRAM_SEPARABLE, GL_TRUE)
+   ```
+
+   标记该程序为可分离。
+
+   ```cpp
+   glProgramParameter(program, GL_PROGRAM_SEPARABLE, GL_TRUE);
+   glLinkProgram(program); // 必须在此后链接
+   ```
+
+**方法二：快捷创建单阶段程序**
+
+- 使用`glCreateShaderProgramv`：
+
+  此函数直接从单个着色器源码创建程序，自动完成以下步骤：
+
+  1. 根据`type`（如`GL_VERTEX_SHADER`）创建着色器对象。
+  2. 将源码编译并链接到程序中，并自动设置`GL_PROGRAM_SEPARABLE`。
+  3. 分离并删除临时着色器对象。
+
+  ```cpp
+  GLuint program = glCreateShaderProgramv(GL_VERTEX_SHADER, 1, &vertexShaderSource);
+  ```
+
+**3. 关键注意事项**
+
+- **错误检查**：
+  即使`glCreateShaderProgramv`返回非零值（表示程序创建成功），仍需检查程序的信息日志（InfoLog），因为编译或链接可能失败。
+- **接口块重声明**：
+  如果着色器使用了内置接口块`gl_PerVertex`（如顶点输出变量），需在所有相关着色器中显式重新声明该块，否则链接器可能无法识别。
+- **多阶段程序的限制**：
+  虽然一个可分离程序可以包含多个阶段的代码，但最佳实践是**每个程序仅包含一个阶段**。若程序A同时包含顶点阶段和片段阶段，则无法在中间插入其他程序（如几何阶段程序），因为OpenGL的管线验证规则会阻止这种组合。
+- **变换反馈参数的特殊处理**：
+  在OpenGL 4.4或扩展`ARB_enhanced_layouts`之前，变换反馈（Transform Feedback）的参数需直接在着色器中设置，无法通过API配置。若需兼容旧版本，可能需要使用传统着色器编译流程。
+
+**4. 版本与扩展支持**
+
+- **核心版本支持**：
+  可分离程序功能自OpenGL 4.1核心版本引入，4.6版本进一步完善。
+- **扩展支持**：
+  通过扩展`ARB_separate_shader_objects`可在支持该扩展的硬件上使用此功能。
+
+**5. 总结**
+
+可分离着色器程序通过以下方式提升灵活性：
+
+- **模块化设计**：将不同着色器阶段拆分到独立程序，便于复用和维护。
+- **动态组合**：在渲染时按需组合阶段，优化性能或实现复杂效果。
+
+但需注意：
+
+- **接口块和变换反馈的兼容性**。
+- **避免多阶段程序导致的管线限制**。
+- **严格的错误检查流程**。
+
+这一机制尤其适合需要高度定制化渲染管线的场景，如延迟渲染、后期处理等。
+
+### Mixing a single- and a multi-stage program混合单阶段和多阶段程序的问题
+
+```c++
+// Create two programs. One with just the vertex shader, and 
+// one with both geometry and fragment stages.
+GLuint vertexProgram   = glCreateProgram();
+GLuint geomFragProgram = glCreateProgram();
+
+// Declare that programs are separable - this is crucial!
+glProgramParameteri(vertexProgram  , GL_PROGRAM_SEPARABLE, GL_TRUE);
+glProgramParameteri(geomFragProgram, GL_PROGRAM_SEPARABLE, GL_TRUE);
+
+// Generate and compile shader objects, as normal.
+GLuint vertShader  = glCreateShader(GL_VERTEX_SHADER);
+GLuint geomShader  = glCreateShader(GL_GEOMETRY_SHADER);
+GLuint fragShader  = glCreateShader(GL_FRAGMENT_SHADER);
+
+glShaderSource(vertShader, 1, &vertSrc, NULL);
+glShaderSource(geomShader, 1, &geomSrc, NULL);
+glShaderSource(fragShader, 1, &fragSrc, NULL);
+
+glCompileShader(vertShader);
+glCompileShader(geomShader);
+glCompileShader(fragShader);
+
+// Attach the shaders to their respective programs
+glAttachShader(vertexProgram  , vertShader);
+glAttachShader(geomFragProgram, geomShader);
+glAttachShader(geomFragProgram, fragShader);
+
+// Perform any pre-linking steps.
+glBindAttribLocation(vertexProgram    , 0, "Position");
+glBindFragDataLocation(geomFragProgram, 0, "FragColor");
+
+// Link the programs
+glLinkProgram(vertexProgram);
+glLinkProgram(geomFragProgram);
+
+// Detach and delete the shader objects
+glDetachShader(vertexProgram, vertShader);
+glDeleteShader(vertShader);
+
+glDetachShader(geomFragProgram, geomShader);
+glDetachShader(geomFragProgram, fragShader);
+glDeleteShader(geomShader);
+glDeleteShader(fragShader);
+
+// Generate a program pipeline
+glGenProgramPipelines(1, &pipeline);
+
+// Attach the first program to the vertex stage, and the second program
+// to the geometry and fragment stages
+glUseProgramStages(pipeline, GL_VERTEX_SHADER_BIT, vertexProgram);
+glUseProgramStages(pipeline, GL_GEOMETRY_SHADER_BIT | GL_FRAGMENT_SHADER_BIT, geomFragProgram);
+```
+
+### 程序流水线(ProgramPipeline)核心概念解析
+
+1. 程序流水线对象：
+
+   - 是OpenGL中专门用于管理多阶段着色器程序的容器对象
+
+   - 遵循标准OpenGL对象生命周期（生成-绑定-使用-删除）
+
+   - 关键API：
+
+     ```cpp
+     glGenProgramPipelines()    // 创建对象
+     glDeleteProgramPipelines() // 删除对象
+     glBindProgramPipelines()   // 绑定到上下文
+     ```
+
+2. 与常规程序对象的区别：
+
+   - 不需要指定绑定目标（如GL_VERTEX_PROGRAM等）
+   - 支持动态组合多个可分离程序（Separable Programs）
+   - 专为现代GPU的多阶段着色器流水线设计
+
+关键技术细节
+
+1. 着色器阶段控制：
+
+   ```cpp
+   glUseProgramStages(pipeline, stages, program);
+   ```
+
+   - 参数解析：
+     - `pipeline`：目标流水线对象
+     - `stages`：位域标志（指定要设置的着色器阶段）
+       - 常用标志：
+         `GL_VERTEX_SHADER_BIT` // 顶点着色器
+         `GL_FRAGMENT_SHADER_BIT` // 片段着色器
+         `GL_GEOMETRY_SHADER_BIT` // 几何着色器
+         `GL_ALL_SHADER_BITS` // 所有阶段
+     - `program`：可分离程序对象或0
+   - 特殊行为：
+     - 当`program=0`时：清除指定阶段的着色器代码
+     - 当`program`有效时：将程序中的对应阶段代码注入流水线
+
+2. 可分离程序要求：
+
+   - 必须为可分离程序（通过`GL_SEPARABLE_ATTRIB`标记创建）
+   - 程序需包含`stages`参数指定的所有阶段的有效代码
+   - 支持动态替换流水线中的任意阶段
+
+#### 使用规范建议
+
+1. 绑定时机：
+
+   - 仅在需要渲染或设置uniform变量时绑定
+   - 避免长期保持绑定状态（优化性能）
+
+2. 资源管理：
+
+   - 流水线对象不能跨OpenGL上下文共享
+   - 每个上下文需维护自己的流水线对象副本
+
+3. 典型工作流程：
+
+   ```cpp
+   // 创建流水线
+   GLuint pipeline;
+   glGenProgramPipelines(1, &pipeline);
+    
+   // 绑定流水线
+   glBindProgramPipeline(GL_RENDER, pipeline);
+    
+   // 配置各阶段程序
+   glUseProgramStages(pipeline, GL_VERTEX_SHADER_BIT, vertexProgram);
+   glUseProgramStages(pipeline, GL_FRAGMENT_SHADER_BIT, fragmentProgram);
+    
+   // 渲染时使用
+   glDrawArrays(...);
+    
+   // 清理
+   glDeleteProgramPipelines(1, &pipeline);
+   ```
+
+**高级应用场景**
+
+1. 动态着色器组合：
+   - 运行时切换不同光照模型（通过替换片段着色器）
+   - 实现后期处理流水线（组合多个片段着色器阶段）
+2. 多技术渲染：
+   - 同时维护多个流水线对象（如：前向渲染管线 + 延迟渲染管线）
+   - 根据场景需求快速切换整个着色器配置
+3. 跨阶段资源优化：
+   - 共享uniform缓冲区对象（UBO）
+   - 实现跨阶段的常量数据高效传递
+
+**注意事项**
+
+- 错误检查：确保`program`参数为0或有效可分离程序
+- 阶段冲突：避免为同一阶段绑定多个程序（后绑定的会覆盖前者）
+- 性能监控：频繁切换流水线对象可能影响渲染效率，需合理设计使用频率
+
+这种设计使得现代OpenGL应用程序可以更灵活地管理复杂的着色器流水线，特别适用于需要动态调整渲染技术的场景（如实时渲染引擎、游戏引擎等）。
+
+### 着色器的二进制缓存
+
+#### 创建着色器程序的二进制格式
+
+```c++
+// 1. 创建并链接原始程序
+GLuint originalProgram = glCreateProgram();
+// ... 附加着色器并链接 ...
+glLinkProgram(originalProgram);
+
+// 2. 获取二进制数据
+GLint binaryLength = 0;
+glGetProgramiv(originalProgram, GL_PROGRAM_BINARY_LENGTH, &binaryLength);
+
+if(binaryLength > 0) {
+    GLenum binaryFormat;
+    std::vector<GLubyte> binaryData(binaryLength);
+    
+    glGetProgramBinary(originalProgram, binaryLength, nullptr, &binaryFormat, binaryData.data());
+    
+    // 3. 创建新程序并加载二进制
+    GLuint newProgram = glCreateProgram();
+    glProgramBinary(newProgram, binaryFormat, binaryData.data(), binaryLength);
+    
+    // 4. 验证加载结果
+    GLint linkStatus;
+    glGetProgramiv(newProgram, GL_LINK_STATUS, &linkStatus);
+    if(linkStatus == GL_TRUE) {
+        // 成功使用newProgram
+    } else {
+        // 回退到原始链接方式
+    }
+}
+
+// 5. 查询支持的格式（调试用）
+GLint numFormats = 0;
+glGetIntegerv(GL_NUM_PROGRAM_BINARY_FORMATS, &numFormats);
+std::vector<GLint> formats(numFormats);
+glGetIntegerv(GL_PROGRAM_BINARY_FORMATS, formats.data());
+```
+
+格式验证
+
+```c++
+// 在加载前检查格式是否支持
+bool isFormatSupported(GLenum format) {
+    GLint numFormats;
+    glGetIntegerv(GL_NUM_PROGRAM_BINARY_FORMATS, &numFormats);
+    std::vector<GLint> supportedFormats(numFormats);
+    glGetIntegerv(GL_PROGRAM_BINARY_FORMATS, supportedFormats.data());
+    return std::find(supportedFormats.begin(), supportedFormats.end(), format) != supportedFormats.end();
+}
+```
+
+### 

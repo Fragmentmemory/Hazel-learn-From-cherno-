@@ -24,15 +24,16 @@ include "Wizar/vendor/imgui"
 
 project "Wizar"
 	location "Wizar"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	pchheader "Wzpch.h"
-	pchsource "Wizar/src/Wzpch.cpp"
+	pchheader "wzpch.h"
+	pchsource "Wizar/src/wzpch.cpp"
 
 	files
 	{
@@ -40,6 +41,11 @@ project "Wizar"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
+	}
+
+	defines
+	{
+		" _CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -61,9 +67,7 @@ project "Wizar"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
-		buildoptions { "/utf-8" }
 		
 		defines
 		{
@@ -72,31 +76,27 @@ project "Wizar"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
-
 	filter "configurations:Debug"
-		defines "WZ_DEBUG"
+		defines {"WZ_DEBUG","WZ_ENABLE_ASSERTS"}
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "WZ_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "WZ_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"	
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -121,26 +121,24 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
-		buildoptions { "/utf-8" }
-
+		
 		defines
 		{
-			"WZ_PLATFORM_WINDOWS"
+			"WZ_PLATFORM_WINDOWS",
 		}
 
 	filter "configurations:Debug"
-		defines "WZ_DEBUG"
+		defines {"WZ_DEBUG","WZ_ENABLE_ASSERTS"}
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "WZ_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "WZ_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"

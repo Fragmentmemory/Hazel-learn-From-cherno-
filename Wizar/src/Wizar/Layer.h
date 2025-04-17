@@ -4,7 +4,7 @@
 #include "Wizar/Events/Event.h"
 
 namespace Wizar {
-	class Wizar_API Layer
+	class WIZAR_API Layer
 	{
 	public:
 		Layer(const std::string& name = "Layer");

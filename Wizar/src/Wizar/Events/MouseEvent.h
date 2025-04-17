@@ -4,7 +4,7 @@
 
 namespace Wizar {
 
-	class Wizar_API MouseMoveEvent : public Event
+	class WIZAR_API MouseMoveEvent : public Event
 	{
 	public:
 		MouseMoveEvent(float x, float y)
@@ -26,7 +26,7 @@ namespace Wizar {
 		float m_MouseX, m_MouseY;
 	};
 
-	class Wizar_API MouseScrolledEvent : public Event
+	class WIZAR_API MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float x, float y)
@@ -51,7 +51,7 @@ namespace Wizar {
 	/*
 		MouseButtonPressedEvent和MouseButtonReleasedEvent的基类,用于简化代码
 	*/
-	class Wizar_API MouseButtonEvent : public Event
+	class WIZAR_API MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button; }
@@ -64,7 +64,7 @@ namespace Wizar {
 		int m_Button;
 	};
 
-	class Wizar_API MouseButtonPressedEvent : public MouseButtonEvent
+	class WIZAR_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button)
@@ -80,7 +80,7 @@ namespace Wizar {
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class Wizar_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class WIZAR_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)

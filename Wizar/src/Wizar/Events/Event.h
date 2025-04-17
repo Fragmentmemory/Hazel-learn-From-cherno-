@@ -40,7 +40,7 @@ namespace Wizar {
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	class Wizar_API Event
+	class WIZAR_API Event
 	{
 	public:
 		bool Handled = false;

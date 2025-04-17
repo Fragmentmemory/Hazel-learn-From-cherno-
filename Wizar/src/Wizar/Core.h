@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef WZ_PLATFORM_WINDOWS
+#if WZ_DDYNAMIC_LINK
 	#ifdef WZ_BUILD_DLL
-		#define Wizar_API __declspec(dllexport)
+		#define WIZAR_API __declspec(dllexport)
 		#else
-		#define Wizar_API __declspec(dllimport)
+		#define WIZAR_API __declspec(dllimport)
 	#endif
+#else 
+#define WIZAR_API
+#endif
 	#else
 		#error Wizar only support Windows!
 #endif

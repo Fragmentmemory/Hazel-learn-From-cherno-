@@ -4,7 +4,7 @@
 
 namespace Wizar {
 
-	class Wizar_API KeyEvent : public Event
+	class WIZAR_API KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
@@ -17,7 +17,7 @@ namespace Wizar {
 		int m_KeyCode;
 	};
 
-	class Wizar_API KeyPressedEvent : public KeyEvent
+	class WIZAR_API KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount)
@@ -37,7 +37,7 @@ namespace Wizar {
 		int m_RepeatCount;
 	};
 
-	class Wizar_API KeyReleasedEvent : public KeyEvent
+	class WIZAR_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)
@@ -52,7 +52,7 @@ namespace Wizar {
 
 		EVENT_CLASS_TYPE(KeyReleased);
 	};
-	class Wizar_API KeyTypedEvent : public KeyEvent
+	class WIZAR_API KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)

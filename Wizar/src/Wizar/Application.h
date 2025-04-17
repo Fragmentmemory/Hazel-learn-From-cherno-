@@ -8,10 +8,13 @@
 #include "Wizar/Events/ApplicationEvent.h"
 
 #include "Wizar/ImGui/ImGuiLayer.h"
+#include "Wizar/Renderer/shader.h"
+#include "Wizar/Renderer/Buffer.h"
+#include "Wizar/Renderer/VertexArray.h"
 
 namespace Wizar {
 
-	class Wizar_API Application
+	class WIZAR_API Application
 	{
 	public:
 		Application();
@@ -34,6 +37,12 @@ namespace Wizar {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+
+		std::unique_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<Shader> m_BuleShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
 	private:
 		static Application* s_Instance;
 	};

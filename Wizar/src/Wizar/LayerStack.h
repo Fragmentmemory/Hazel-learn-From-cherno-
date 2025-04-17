@@ -11,7 +11,7 @@ namespace Wizar {
 	//	layer1 游戏中的UI（击杀敌人时显示的图标）
 	//	layer2 游戏角色
 	//	layer3 游戏背景
-	class Wizar_API LayerStack
+	class WIZAR_API LayerStack
 	{
 	public:
 		LayerStack();

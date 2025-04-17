@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Wizar/Window.h"
+#include "Wizar/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -22,13 +23,14 @@ namespace Wizar {
 		bool IsVSync() const override;
 
 		//virtual增加可读性, 提醒这是继承基类的函数 
-		virtual void* GetNativeWindow() const { return m_window; }
+		virtual void* GetNativeWindow() const { return m_Window; }
 
 	private:
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 	private:
-		GLFWwindow* m_window;
+		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

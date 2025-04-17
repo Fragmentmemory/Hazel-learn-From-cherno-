@@ -5,7 +5,8 @@
 #include "Wizar/Events/MouseEvent.h"
 #include "Wizar/Events/KeyEvent.h"
 
-#include <glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
+
 
 namespace Wizar {
 	
@@ -23,7 +24,7 @@ namespace Wizar {
 
 	void WindowsWindow::Shutdown()
 	{
-		glfwDestroyWindow(m_window);
+		glfwDestroyWindow(m_Window);
 	}
 
 
@@ -54,21 +55,17 @@ namespace Wizar {
 		}
 
 		//创建GLFW窗口
-		m_window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
-		//设置当前线程的OpenGL上下文, 他告诉程序当前在那个窗口(或上下文)上渲染
-		glfwMakeContextCurrent(m_window);
-
-		//初始化glad
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		WZ_CORE_ASSERT(status, "Failed to initialize Glad!");
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
 
 		//将我们自定义的数据指针与GLFW窗口相关联
-		glfwSetWindowUserPointer(m_window, &m_Data);
+		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
 		// Set GLFW callbacks
-		glfwSetWindowSizeCallback(m_window, [](GLFWwindow* window, int width, int height)
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				data.Width = width;
@@ -78,14 +75,14 @@ namespace Wizar {
 				data.EventCallback(event);
 			});
 
-		glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window) 
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) 
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				WindowCloseEvent event;
 				data.EventCallback(event);
 			});
 
-		glfwSetKeyCallback(m_window, [](GLFWwindow* window,int key,int scancode,int action,int mods) 
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window,int key,int scancode,int action,int mods) 
 			{	
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -113,13 +110,13 @@ namespace Wizar {
 
 			});
 
-		glfwSetCharCallback(m_window, [](GLFWwindow* window,unsigned int keycode) {
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window,unsigned int keycode) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			KeyTypedEvent event(keycode);
 			data.EventCallback(event);
 			});
 
-		glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods)
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -141,17 +138,17 @@ namespace Wizar {
 				}
 			});
 
-		glfwSetScrollCallback(m_window, [](GLFWwindow* window,double x0ffset,double y0ffset) 
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window,double x0ffset,double y0ffset) 
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				MouseScrolledEvent event((float)x0ffset, (float)y0ffset);
 				data.EventCallback(event);
 			});
 
-		glfwSetCursorPosCallback(m_window, [](GLFWwindow* window,double xpos, double ypos)
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window,double xpos, double ypos)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				MouseMoveEvent event(xpos, ypos);
+				MouseMoveEvent event((float)xpos, (float)ypos);
 				data.EventCallback(event);
 			});
 
@@ -160,7 +157,8 @@ namespace Wizar {
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_window);
+		m_Context->SwapBuffers();
+		
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)

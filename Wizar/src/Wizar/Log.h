@@ -8,7 +8,7 @@
 
 namespace Wizar {
 
-	class Wizar_API Log
+	class WIZAR_API Log
 	{
 	public:
 		static void Init();
