@@ -108,7 +108,7 @@
     <ClInclude Include="src\Wizar\Window.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
-    <ClInclude Include="src\wizar.h">
+    <ClInclude Include="src\Wizar.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\wzpch.h">
@@ -1373,6 +1373,11 @@
     <ClInclude Include="src\Wizar\Renderer\Renderer.h" />
     <ClInclude Include="src\Wizar\Renderer\VertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Wizar\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\Wizar\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Wizar\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\Wizar\Core\TimeStep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
@@ -1413,5 +1418,10 @@
     <ClCompile Include="src\Wizar\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Wizar\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Wizar\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Wizar\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Wizar\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Wizar\Core\TimeStep.cpp" />
   </ItemGroup>
 </Project>

@@ -7,10 +7,9 @@
 #include "Wizar/Events/Event.h"
 #include "Wizar/Events/ApplicationEvent.h"
 
+#include "Wizar/Core/Timestep.h"
+
 #include "Wizar/ImGui/ImGuiLayer.h"
-#include "Wizar/Renderer/shader.h"
-#include "Wizar/Renderer/Buffer.h"
-#include "Wizar/Renderer/VertexArray.h"
 
 namespace Wizar {
 
@@ -38,11 +37,8 @@ namespace Wizar {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		std::unique_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
+		float m_LastFrameTime = 0.0f;
 
-		std::shared_ptr<Shader> m_BuleShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
 	private:
 		static Application* s_Instance;
 	};

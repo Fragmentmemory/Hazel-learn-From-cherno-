@@ -11,24 +11,20 @@ namespace Wizar {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
-			WZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
-		case RendererAPI::OpenGL:
-			return new OpenGLVertexBuffer(vertices, size);
+		case RendererAPI::API::None:    WZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case RendererAPI::API::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
 		}
 
 		WZ_CORE_ASSERT(false, "Unknown RendererAPI");
 		return nullptr;
 	}
 
-	Wizar::IndexBuffer* IndexBuffer::Create(uint32_t* Indices, uint32_t size)
+	Wizar::IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
-			WZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!");
-		case RendererAPI::OpenGL:
-			return new OpenGLIndexBuffer(Indices, size);
+		case RendererAPI::API::None:    WZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case RendererAPI::API::OpenGL:  return new OpenGLIndexBuffer(indices, size);
 		}
 
 		WZ_CORE_ASSERT(false, "Unknown RendererAPI");
