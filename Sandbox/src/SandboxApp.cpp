@@ -99,7 +99,7 @@ public:
 				color = v_Color;
 			}
 		)";
-		m_Shader.reset(Wizar::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Wizar::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 			
@@ -126,15 +126,16 @@ public:
 				color = vec4(0.2, 0.3, 0.8, 1.0);
 			}
 		)";
-		m_FlatColorShader.reset(Wizar::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = Wizar::Shader::Create("FlatColor", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
-		m_TextureShader.reset(Wizar::Shader::Create("assets/shaders/Texture.glsl"));
+
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		m_Texture = Wizar::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_ChernoLogoTexture = Wizar::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<Wizar::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Wizar::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Wizar::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Wizar::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Wizar::TimeStep ts) override
@@ -177,11 +178,13 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		Wizar::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Wizar::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_ChernoLogoTexture->Bind();
-		Wizar::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
- 
+		Wizar::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
  		Wizar::Renderer::EndScene();
 	}
 
@@ -203,10 +206,11 @@ public:
 		}
 	}
 	private:
+		Wizar::ShaderLibrary m_ShaderLibrary;
 		Wizar::Ref<Wizar::Shader> m_Shader;
 		Wizar::Ref<Wizar::VertexArray> m_VertexArray;
 
-		Wizar::Ref<Wizar::Shader> m_FlatColorShader, m_TextureShader;
+		Wizar::Ref<Wizar::Shader> m_FlatColorShader;
 		Wizar::Ref<Wizar::VertexArray> m_SquareVA;
 
 		Wizar::Ref<Wizar::Texture2D> m_Texture, m_ChernoLogoTexture;
