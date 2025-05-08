@@ -8,6 +8,10 @@ workspace "Wizar"
 		"Release",
 		"Dist"
 	}
+	flags
+	{
+		"MultiProcessorCompile"
+	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -17,6 +21,7 @@ IncludeDir["GLFW"] = "Wizar/vendor/GLFW/include"
 IncludeDir["Glad"] = "Wizar/vendor/Glad/include"
 IncludeDir["ImGui"] = "Wizar/vendor/imgui"
 IncludeDir["glm"] = "Wizar/vendor/glm"
+IncludeDir["stb_image"] = "Wizar/vendor/stb_image"
 
 include "Wizar/vendor/GLFW"
 include "Wizar/vendor/Glad"
@@ -39,6 +44,8 @@ project "Wizar"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -55,7 +62,8 @@ project "Wizar"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links 

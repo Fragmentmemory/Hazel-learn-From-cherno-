@@ -20,6 +20,7 @@
 
 #include "Wizar/Renderer/Buffer.h"
 #include "Wizar/Renderer/Shader.h"
+#include "Wizar/Renderer/Texture.h"
 #include "Wizar/Renderer/VertexArray.h"
 
 #include "Wizar/Renderer/OrthographicCamera.h"

@@ -4,6 +4,14 @@
 #include <glad/glad.h>
 
 namespace Wizar {
+	//初始化OpenGL
+	void OpenGLRendererAPI::Init()
+	{
+		//默认情况下 OpenGL 会直接覆盖像素颜色，启用混合后允许新颜色与已有颜色按特定规则混合
+		glEnable(GL_BLEND);
+		//设置混合方程参数 最终颜色 = (源颜色 × 源.alpha) + (目标颜色 × (1 - 源.alpha))
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
 
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 	{

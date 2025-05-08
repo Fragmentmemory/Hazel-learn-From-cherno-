@@ -16,6 +16,9 @@
     <Filter Include="src\Wizar">
       <UniqueIdentifier>{090A1EB4-7574-D22A-BEB2-83D02A5CB07F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Wizar\Core">
+      <UniqueIdentifier>{01DCEB62-EDA9-DF68-D63D-508FC2AABBCD}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Wizar\Events">
       <UniqueIdentifier>{CDF174D2-B9EA-9324-E21C-79A9CE747330}</UniqueIdentifier>
     </Filter>
@@ -46,9 +49,27 @@
     <Filter Include="vendor\glm\glm\gtx">
       <UniqueIdentifier>{B3A6A76B-9F8A-68C1-08EB-6214F4ED5243}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor\stb_image">
+      <UniqueIdentifier>{0DA0BA59-F998-D9AB-22CB-BE300E23B9B7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
@@ -57,11 +78,17 @@
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>src\Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\Wizar.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Wizar\Application.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
     <ClInclude Include="src\Wizar\Core.h">
       <Filter>src\Wizar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wizar\Core\TimeStep.h">
+      <Filter>src\Wizar\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Wizar\EntryPoint.h">
       <Filter>src\Wizar</Filter>
@@ -99,17 +126,35 @@
     <ClInclude Include="src\Wizar\MouseButtonCodes.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
+    <ClInclude Include="src\Wizar\Renderer\Buffer.h">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Wizar\Renderer\GraphicsContext.h">
       <Filter>src\Wizar\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\Renderer\shader.h">
+    <ClInclude Include="src\Wizar\Renderer\OrthographicCamera.h">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wizar\Renderer\RenderCommand.h">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wizar\Renderer\Renderer.h">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wizar\Renderer\RendererAPI.h">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wizar\Renderer\Shader.h">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wizar\Renderer\Texture.h">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Wizar\Renderer\VertexArray.h">
       <Filter>src\Wizar\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Wizar\Window.h">
       <Filter>src\Wizar</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Wizar.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\wzpch.h">
       <Filter>src</Filter>
@@ -1368,19 +1413,27 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\Renderer\Buffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Wizar\Renderer\Renderer.h" />
-    <ClInclude Include="src\Wizar\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Wizar\Renderer\RenderCommand.h" />
-    <ClInclude Include="src\Wizar\Renderer\RendererAPI.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
-    <ClInclude Include="src\Wizar\Renderer\OrthographicCamera.h" />
-    <ClInclude Include="src\Wizar\Core\TimeStep.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h">
+      <Filter>vendor\stb_image</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -1391,6 +1444,9 @@
     </ClCompile>
     <ClCompile Include="src\Wizar\Application.cpp">
       <Filter>src\Wizar</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wizar\Core\TimeStep.cpp">
+      <Filter>src\Wizar\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Wizar\ImGui\ImGuiBuild.cpp">
       <Filter>src\Wizar\ImGui</Filter>
@@ -1407,21 +1463,35 @@
     <ClCompile Include="src\Wizar\Log.cpp">
       <Filter>src\Wizar</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wizar\Renderer\shader.cpp">
+    <ClCompile Include="src\Wizar\Renderer\Buffer.cpp">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wizar\Renderer\OrthographicCamera.cpp">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wizar\Renderer\RenderCommand.cpp">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wizar\Renderer\Renderer.cpp">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wizar\Renderer\RendererAPI.cpp">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wizar\Renderer\Shader.cpp">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wizar\Renderer\Texture.cpp">
+      <Filter>src\Wizar\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Wizar\Renderer\VertexArray.cpp">
       <Filter>src\Wizar\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\wzpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wizar\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Wizar\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Wizar\Renderer\VertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="src\Wizar\Renderer\RenderCommand.cpp" />
-    <ClCompile Include="src\Wizar\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\Wizar\Renderer\OrthographicCamera.cpp" />
-    <ClCompile Include="src\Wizar\Core\TimeStep.cpp" />
+    <ClCompile Include="vendor\stb_image\stb_image.cpp">
+      <Filter>vendor\stb_image</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
