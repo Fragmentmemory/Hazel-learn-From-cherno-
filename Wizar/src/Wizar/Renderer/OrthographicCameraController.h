@@ -31,7 +31,7 @@ namespace Wizar {
 		   bool m_Rotation;
 
 		   glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
-		   float m_CameraRotation = 0.0f;
+		   float m_CameraRotation = 0.0f; //以度为单位，逆时针方向
 		   float m_CameraTranslationSpeed = 5.0f, m_CameraRotationSpeed = 180.0f;
 	};
 
