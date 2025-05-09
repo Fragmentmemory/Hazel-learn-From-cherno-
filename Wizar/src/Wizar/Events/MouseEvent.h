@@ -30,22 +30,22 @@ namespace Wizar {
 	{
 	public:
 		MouseScrolledEvent(float x, float y)
-			:m_X0ffset(x), m_Y0ffset(y) {};
+			:m_XOffset(x), m_YOffset(y) {};
 
-		inline float GetX0ffset() const { return m_X0ffset; }
-		inline float GetY0ffset() const { return m_Y0ffset; }
+		inline float GetXOffset() const { return m_XOffset; }
+		inline float GetYOffset() const { return m_YOffset; }
 
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseScrolledEvent: " << GetX0ffset() << ", " << GetY0ffset();
+			ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
 			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	private:
-		float m_X0ffset, m_Y0ffset;
+		float m_XOffset, m_YOffset;
 	};
 
 	/*

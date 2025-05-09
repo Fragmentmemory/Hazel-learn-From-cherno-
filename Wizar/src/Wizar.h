@@ -11,6 +11,7 @@
 #include "Wizar/Input.h"
 #include "Wizar/KeyCodes.h"
 #include "Wizar/MouseButtonCodes.h"
+#include "Wizar/OrthographicCameraController.h"
 
 #include "Wizar/ImGui/ImGuiLayer.h"
 
