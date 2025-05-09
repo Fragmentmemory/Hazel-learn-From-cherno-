@@ -143,7 +143,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Wizar\OrthographicCameraController.h" />
+    <ClInclude Include="src\Wizar\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -153,21 +153,21 @@
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Wizar.h" />
-    <ClInclude Include="src\Wizar\Application.h" />
-    <ClInclude Include="src\Wizar\Core.h" />
+    <ClInclude Include="src\Wizar\Core\Application.h" />
+    <ClInclude Include="src\Wizar\Core\Core.h" />
     <ClInclude Include="src\Wizar\Core\TimeStep.h" />
-    <ClInclude Include="src\Wizar\EntryPoint.h" />
+    <ClInclude Include="src\Wizar\Core\EntryPoint.h" />
     <ClInclude Include="src\Wizar\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Wizar\Events\Event.h" />
     <ClInclude Include="src\Wizar\Events\KeyEvent.h" />
     <ClInclude Include="src\Wizar\Events\MouseEvent.h" />
     <ClInclude Include="src\Wizar\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Wizar\Input.h" />
-    <ClInclude Include="src\Wizar\KeyCodes.h" />
-    <ClInclude Include="src\Wizar\Layer.h" />
-    <ClInclude Include="src\Wizar\LayerStack.h" />
-    <ClInclude Include="src\Wizar\Log.h" />
-    <ClInclude Include="src\Wizar\MouseButtonCodes.h" />
+    <ClInclude Include="src\Wizar\Core\Input.h" />
+    <ClInclude Include="src\Wizar\Core\KeyCodes.h" />
+    <ClInclude Include="src\Wizar\Core\Layer.h" />
+    <ClInclude Include="src\Wizar\Core\LayerStack.h" />
+    <ClInclude Include="src\Wizar\Core\Log.h" />
+    <ClInclude Include="src\Wizar\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\Wizar\Renderer\Buffer.h" />
     <ClInclude Include="src\Wizar\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Wizar\Renderer\OrthographicCamera.h" />
@@ -177,7 +177,7 @@
     <ClInclude Include="src\Wizar\Renderer\Shader.h" />
     <ClInclude Include="src\Wizar\Renderer\Texture.h" />
     <ClInclude Include="src\Wizar\Renderer\VertexArray.h" />
-    <ClInclude Include="src\Wizar\Window.h" />
+    <ClInclude Include="src\Wizar\Core\Window.h" />
     <ClInclude Include="src\wzpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
@@ -600,7 +600,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Wizar\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\Wizar\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
@@ -609,13 +609,13 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\Wizar\Application.cpp" />
+    <ClCompile Include="src\Wizar\Core\Application.cpp" />
     <ClCompile Include="src\Wizar\Core\TimeStep.cpp" />
     <ClCompile Include="src\Wizar\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Wizar\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Wizar\Layer.cpp" />
-    <ClCompile Include="src\Wizar\LayerStack.cpp" />
-    <ClCompile Include="src\Wizar\Log.cpp" />
+    <ClCompile Include="src\Wizar\Core\Layer.cpp" />
+    <ClCompile Include="src\Wizar\Core\LayerStack.cpp" />
+    <ClCompile Include="src\Wizar\Core\Log.cpp" />
     <ClCompile Include="src\Wizar\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Wizar\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Wizar\Renderer\RenderCommand.cpp" />

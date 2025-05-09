@@ -3,7 +3,7 @@
 #include "Core.h"
 
 #include "Window.h"
-#include "Wizar/LayerStack.h"
+#include "Wizar/Core/LayerStack.h"
 #include "Wizar/Events/Event.h"
 #include "Wizar/Events/ApplicationEvent.h"
 

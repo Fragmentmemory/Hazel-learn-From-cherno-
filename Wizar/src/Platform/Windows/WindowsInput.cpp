@@ -1,7 +1,7 @@
 #include "Wzpch.h"
 #include "WindowsInput.h"
 
-#include "Wizar/Application.h"
+#include "Wizar/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 

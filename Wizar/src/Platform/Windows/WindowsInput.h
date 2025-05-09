@@ -1,5 +1,5 @@
 #pragma once
-#include "Wizar\Input.h"
+#include "Wizar/Core/Input.h"
 
 namespace Wizar {
 	class WindowsInput : public Input

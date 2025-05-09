@@ -1,8 +1,8 @@
 #include "wzpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Wizar/Input.h"
-#include "Wizar/KeyCodes.h"
+#include "Wizar/Core/Input.h"
+#include "Wizar/Core/KeyCodes.h"
 
 namespace Wizar{
 

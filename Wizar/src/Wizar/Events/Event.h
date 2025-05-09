@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Wzpch.h"
-#include "Wizar/Core.h"
+#include "Wizar/Core/Core.h"
 
 namespace Wizar {
 

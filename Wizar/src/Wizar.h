@@ -2,16 +2,16 @@
 
 // For use by Wizar applictions
 
-#include "Wizar/Application.h"
-#include "Wizar/Layer.h"
-#include "Wizar/Log.h"
+#include "Wizar/Core/Application.h"
+#include "Wizar/Core/Layer.h"
+#include "Wizar/Core/Log.h"
 
 #include "Wizar/Core/Timestep.h"
 
-#include "Wizar/Input.h"
-#include "Wizar/KeyCodes.h"
-#include "Wizar/MouseButtonCodes.h"
-#include "Wizar/OrthographicCameraController.h"
+#include "Wizar/Core/Input.h"
+#include "Wizar/Core/KeyCodes.h"
+#include "Wizar/Core/MouseButtonCodes.h"
+#include "Wizar/Renderer/OrthographicCameraController.h"
 
 #include "Wizar/ImGui/ImGuiLayer.h"
 
@@ -28,5 +28,5 @@
 // -----------------------------------
 
 // ---Entry Point---------------
-#include "Wizar/EntryPoint.h"
+#include "Wizar/Core/EntryPoint.h"
 // -----------------------------

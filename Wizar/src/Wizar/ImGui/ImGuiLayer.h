@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Wizar/Layer.h"
+#include "Wizar/Core/Layer.h"
 
 #include "Wizar/Events/Event.h"
 #include "Wizar/Events/MouseEvent.h"

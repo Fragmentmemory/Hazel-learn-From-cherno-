@@ -81,16 +81,16 @@
     <ClInclude Include="src\Wizar.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\Application.h">
+    <ClInclude Include="src\Wizar\Core\Application.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\Core.h">
+    <ClInclude Include="src\Wizar\Core\Core.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
     <ClInclude Include="src\Wizar\Core\TimeStep.h">
       <Filter>src\Wizar\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\EntryPoint.h">
+    <ClInclude Include="src\Wizar\Core\EntryPoint.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
     <ClInclude Include="src\Wizar\Events\ApplicationEvent.h">
@@ -108,22 +108,22 @@
     <ClInclude Include="src\Wizar\ImGui\ImGuiLayer.h">
       <Filter>src\Wizar\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\Input.h">
+    <ClInclude Include="src\Wizar\Core\Input.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\KeyCodes.h">
+    <ClInclude Include="src\Wizar\Core\KeyCodes.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\Layer.h">
+    <ClInclude Include="src\Wizar\Core\Layer.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\LayerStack.h">
+    <ClInclude Include="src\Wizar\Core\LayerStack.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\Log.h">
+    <ClInclude Include="src\Wizar\Core\Log.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\MouseButtonCodes.h">
+    <ClInclude Include="src\Wizar\Core\MouseButtonCodes.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
     <ClInclude Include="src\Wizar\Renderer\Buffer.h">
@@ -153,7 +153,7 @@
     <ClInclude Include="src\Wizar\Renderer\VertexArray.h">
       <Filter>src\Wizar\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\Window.h">
+    <ClInclude Include="src\Wizar\Core\Window.h">
       <Filter>src\Wizar</Filter>
     </ClInclude>
     <ClInclude Include="src\wzpch.h">
@@ -1416,7 +1416,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wizar\OrthographicCameraController.h" />
+    <ClInclude Include="src\Wizar\Renderer\OrthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1443,7 +1443,7 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wizar\Application.cpp">
+    <ClCompile Include="src\Wizar\Core\Application.cpp">
       <Filter>src\Wizar</Filter>
     </ClCompile>
     <ClCompile Include="src\Wizar\Core\TimeStep.cpp">
@@ -1455,13 +1455,13 @@
     <ClCompile Include="src\Wizar\ImGui\ImGuiLayer.cpp">
       <Filter>src\Wizar\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wizar\Layer.cpp">
+    <ClCompile Include="src\Wizar\Core\Layer.cpp">
       <Filter>src\Wizar</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wizar\LayerStack.cpp">
+    <ClCompile Include="src\Wizar\Core\LayerStack.cpp">
       <Filter>src\Wizar</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wizar\Log.cpp">
+    <ClCompile Include="src\Wizar\Core\Log.cpp">
       <Filter>src\Wizar</Filter>
     </ClCompile>
     <ClCompile Include="src\Wizar\Renderer\Buffer.cpp">
@@ -1494,6 +1494,6 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wizar\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\Wizar\Renderer\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>

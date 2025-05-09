@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Wizar/Log.h"
+#include "Wizar/Core/Log.h"
 
 #ifdef WZ_PLATFORM_WINDOWS
 	#include <Windows.h>

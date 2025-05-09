@@ -1,7 +1,7 @@
 #include "Wzpch.h"
 #include "Application.h"
 
-#include "Wizar/Log.h"
+#include "Wizar/Core/Log.h"
 
 #include "Wizar/Renderer/Renderer.h"
 

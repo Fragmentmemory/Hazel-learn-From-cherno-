@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Wizar/Window.h"
+#include "Wizar/Core/Window.h"
 #include "Wizar/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

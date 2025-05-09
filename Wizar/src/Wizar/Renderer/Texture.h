@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-#include "Wizar/Core.h"
+#include "Wizar/Core/Core.h"
 
 namespace Wizar {
 	class Texture
