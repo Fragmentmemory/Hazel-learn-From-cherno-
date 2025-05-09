@@ -8,6 +8,7 @@ workspace "Wizar"
 		"Release",
 		"Dist"
 	}
+	
 	flags
 	{
 		"MultiProcessorCompile"
@@ -23,9 +24,12 @@ IncludeDir["ImGui"] = "Wizar/vendor/imgui"
 IncludeDir["glm"] = "Wizar/vendor/glm"
 IncludeDir["stb_image"] = "Wizar/vendor/stb_image"
 
-include "Wizar/vendor/GLFW"
-include "Wizar/vendor/Glad"
-include "Wizar/vendor/imgui"
+group "Dependencies"
+	include "Wizar/vendor/GLFW"
+	include "Wizar/vendor/Glad"
+	include "Wizar/vendor/imgui"
+
+group ""
 
 project "Wizar"
 	location "Wizar"
@@ -52,7 +56,7 @@ project "Wizar"
 
 	defines
 	{
-		" _CRT_SECURE_NO_WARNINGS"
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -76,16 +80,15 @@ project "Wizar"
 
 	filter "system:windows"
 		systemversion "latest"
-		
+
 		defines
 		{
-			"WZ_PLATFORM_WINDOWS",
 			"WZ_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
 
 	filter "configurations:Debug"
-		defines {"WZ_DEBUG","WZ_ENABLE_ASSERTS"}
+		defines "WZ_DEBUG"
 		runtime "Debug"
 		symbols "on"
 
@@ -104,7 +107,7 @@ project "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "on"	
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -131,13 +134,8 @@ project "Sandbox"
 	filter "system:windows"
 		systemversion "latest"
 		
-		defines
-		{
-			"WZ_PLATFORM_WINDOWS",
-		}
-
 	filter "configurations:Debug"
-		defines {"WZ_DEBUG","WZ_ENABLE_ASSERTS"}
+		defines "WZ_DEBUG"
 		runtime "Debug"
 		symbols "on"
 

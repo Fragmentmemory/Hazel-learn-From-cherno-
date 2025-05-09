@@ -25,6 +25,15 @@ namespace Wizar {
 		WZ_CORE_INFO("	Vendor: {0}", glGetString(GL_VENDOR));
 		WZ_CORE_INFO("	Renderer: {0}", glGetString(GL_RENDERER));
 		WZ_CORE_INFO("	Version: {0}",glGetString(GL_VERSION));
+
+#ifdef WZ_ENABLE_ASSERTS //添加了对 OpenGL 版本的检查
+		int versionMajor;
+		int versionMinor;
+		glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
+		glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
+
+		WZ_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "Hazel requires at least OpenGL version 4.5!");
+#endif
 	}
 
 	void OpenGLContext::SwapBuffers()
