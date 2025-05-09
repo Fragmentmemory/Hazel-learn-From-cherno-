@@ -1,4 +1,5 @@
 #include <wizar.h>
+#include <Wizar/Core/EntryPoint.h>
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
@@ -6,6 +7,8 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include "Sandbox2D.h"
 
 class ExampleLayer : public Wizar::Layer
 {
@@ -15,7 +18,7 @@ public:
 	ExampleLayer()
 		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
-		m_VertexArray.reset(Wizar::VertexArray::Create());
+		m_VertexArray = Wizar::VertexArray::Create();
 
 		// Index Buffer
 		float vertices[3 * 7] = {
@@ -43,7 +46,7 @@ public:
 		indexBuffer.reset(Wizar::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		m_SquareVA.reset(Wizar::VertexArray::Create());
+		m_SquareVA = Wizar::VertexArray::Create();
 
 		//蓝色正方形顶点
 		float squareVertices[5 * 4] = {
@@ -204,7 +207,7 @@ class Sandbox : public Wizar::Application
 public:
 	Sandbox()
 	{
-		PushOverlay(new ExampleLayer());
+		PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox()

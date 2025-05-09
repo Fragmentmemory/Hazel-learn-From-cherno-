@@ -1,7 +1,6 @@
 #pragma once
 
 // For use by Wizar applictions
-
 #include "Wizar/Core/Application.h"
 #include "Wizar/Core/Layer.h"
 #include "Wizar/Core/Log.h"
@@ -25,8 +24,4 @@
 #include "Wizar/Renderer/VertexArray.h"
 
 #include "Wizar/Renderer/OrthographicCamera.h"
-// -----------------------------------
-
-// ---Entry Point---------------
-#include "Wizar/Core/EntryPoint.h"
 // -----------------------------
