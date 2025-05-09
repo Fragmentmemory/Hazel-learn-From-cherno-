@@ -16,6 +16,7 @@
 
 // ---Renderer------------------------
 #include "Wizar/Renderer/Renderer.h"
+#include "Wizar/Renderer/Renderer2D.h"
 #include "Wizar/Renderer/RenderCommand.h"
 
 #include "Wizar/Renderer/Buffer.h"

@@ -15,33 +15,11 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-	m_SquareVA = Wizar::VertexArray::Create();
-
-	float squareVertices[5 * 4] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
-	};
-
-	Wizar::Ref<Wizar::VertexBuffer> squareVB;
-	squareVB.reset(Wizar::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
-	squareVB->SetLayout({
-		{ Wizar::ShaderDataType::Float3, "a_Position" }
-		});
-	m_SquareVA->AddVertexBuffer(squareVB);
-
-	uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-	Wizar::Ref<Wizar::IndexBuffer> squareIB;
-	squareIB.reset(Wizar::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
-	m_SquareVA->SetIndexBuffer(squareIB);
-
-	m_FlatColorShader = Wizar::Shader::Create("assets/shaders/FlatColor.glsl");
+	
 }
 
 void Sandbox2D::OnDetach()
 {
-
 }
 
 void Sandbox2D::OnUpdate(Wizar::TimeStep ts)
@@ -53,14 +31,9 @@ void Sandbox2D::OnUpdate(Wizar::TimeStep ts)
 	Wizar::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Wizar::RenderCommand::Clear();
 
-	Wizar::Renderer::BeginScene(m_CameraController.GetCamera());
-
-	std::dynamic_pointer_cast<Wizar::OpenGLShader>(m_FlatColorShader)->Bind();
-	std::dynamic_pointer_cast<Wizar::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
-
-	Wizar::Renderer::Submit(m_FlatColorShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-
-	Wizar::Renderer::EndScene();
+	Wizar::Renderer2D::BeginScene(m_CameraController.GetCamera());
+	Wizar::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Wizar::Renderer2D::EndScene();
 }
 
 void Sandbox2D::OnImGuiRender()
